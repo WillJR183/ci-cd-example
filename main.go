@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"github.com/WillJR183/ci-cd-example/database"
+	"github.com/WillJR183/ci-cd-example/routes"
+)
 
 func main() {
-	fmt.Println("Heey, i am coding on GO programing language")
+	database.ConectaComBancoDeDados()
+	routes.HandleRequest()
 }
