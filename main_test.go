@@ -32,6 +32,7 @@ func CriaAlunoMock() {
 	}
 
 	database.DB.Create(&aluno)
+	ID = int(aluno.ID)
 }
 
 func DeletaAlunoMock() {
@@ -46,7 +47,7 @@ func TestVerificaStatusCodeDeSaudacoesComParametro(t *testing.T) {
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, request)
 	assert.Equal(t, http.StatusOK, response.Code, "Deveriam ser iguais")
-	responseMock := `{"API diz": "E ae will, tudo jóia?"}`
+	responseMock := `{"API diz":"E ae will, tudo jóia?"}`
 	responseBody, _ := ioutil.ReadAll(response.Body)
 
 	assert.Equal(t, responseMock, string(responseBody))
@@ -137,7 +138,7 @@ func TestEditaAlunoHandler(t *testing.T) {
 	var alunoMockAtualizado models.Aluno
 	json.Unmarshal(response.Body.Bytes(), &alunoMockAtualizado)
 
-	assert.Equal(t, "Aluno Teste", &alunoMockAtualizado.Nome)
-	assert.Equal(t, "123567891", &alunoMockAtualizado.RG)
-	assert.Equal(t, "13579246802", &alunoMockAtualizado.CPF)
+	assert.Equal(t, "Aluno Teste", alunoMockAtualizado.Nome)
+	assert.Equal(t, "123567891", alunoMockAtualizado.RG)
+	assert.Equal(t, "13579246802", alunoMockAtualizado.CPF)
 }
