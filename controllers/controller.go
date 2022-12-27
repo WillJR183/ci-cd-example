@@ -41,6 +41,7 @@ func CriarNovoAluno(c *gin.Context) {
 	}
 
 	database.DB.Create(&aluno)
+	c.JSON(http.StatusOK, aluno)
 }
 
 func BuscarAlunoPorId(c *gin.Context) {

@@ -32,6 +32,7 @@ func CriaAlunoMock() {
 	}
 
 	database.DB.Create(&aluno)
+	ID = int(aluno.ID)
 }
 
 func DeletaAlunoMock() {
@@ -137,7 +138,7 @@ func TestEditaAlunoHandler(t *testing.T) {
 	var alunoMockAtualizado models.Aluno
 	json.Unmarshal(response.Body.Bytes(), &alunoMockAtualizado)
 
-	assert.Equal(t, "Aluno Teste", &alunoMockAtualizado.Nome)
-	assert.Equal(t, "123567891", &alunoMockAtualizado.RG)
-	assert.Equal(t, "13579246802", &alunoMockAtualizado.CPF)
+	assert.Equal(t, "Aluno Teste", alunoMockAtualizado.Nome)
+	assert.Equal(t, "123567891", alunoMockAtualizado.RG)
+	assert.Equal(t, "13579246802", alunoMockAtualizado.CPF)
 }
